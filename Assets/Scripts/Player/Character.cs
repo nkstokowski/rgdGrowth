@@ -15,13 +15,11 @@ public class Character : MonoBehaviour
     [SerializeField] private bool m_Grounded;            // Whether or not the player is grounded.
     public Transform m_CeilingCheck;   // A position marking where to check for ceilings
     const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
-    private Animator m_Anim;            // Reference to the player's animator component.
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
     private void Awake()
     {
-        m_Anim = GetComponentInChildren<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -38,17 +36,13 @@ public class Character : MonoBehaviour
             if (!colliders[i].CompareTag("Player"))
                 m_Grounded = true;
         }
-        m_Anim.SetBool("Ground", m_Grounded);
-
-        // Set the vertical animation
-        m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
     }
 
 
     public void Move(float move, bool crouch, bool jump)
     {
         // If crouching, check to see if the character can stand up
-        if (!crouch && m_Anim.GetBool("Crouch"))
+        if (!crouch)
         {
             // If the character has a ceiling preventing them from standing up, keep them crouching
             if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
@@ -57,17 +51,11 @@ public class Character : MonoBehaviour
             }
         }
 
-        // Set whether or not the character is crouching in the animator
-        m_Anim.SetBool("Crouch", crouch);
-
         //only control the player if grounded or airControl is turned on
         if (m_Grounded || m_AirControl)
         {
             // Reduce the speed if crouching by the crouchSpeed multiplier
             move = (crouch ? move * m_CrouchSpeed : move);
-
-            // The Speed animator parameter is set to the absolute value of the horizontal input.
-            m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
             // Move the character
             m_Rigidbody2D.velocity = new Vector2(move * maxSpeed, m_Rigidbody2D.velocity.y);
@@ -86,11 +74,10 @@ public class Character : MonoBehaviour
             }
         }
         // If the player should jump...
-        if (m_Grounded && jump && m_Anim.GetBool("Ground"))
+        if (m_Grounded && jump)
         {
             // Add a vertical force to the player.
             m_Grounded = false;
-            m_Anim.SetBool("Ground", false);
             m_Rigidbody2D.velocity += new Vector2(0f, jumpSpeed);
         }
     }
@@ -111,7 +98,7 @@ public class Character : MonoBehaviour
     {
         BoxCollider2D playerBox = GetComponentInChildren<BoxCollider2D>();
 
-        Vector2 center = (Vector2)transform.position;
+        Vector2 center = transform.position;
         Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, playerBox.size, 0);
 
         for (int i = 0; i < hitColliders.Length; ++i)
