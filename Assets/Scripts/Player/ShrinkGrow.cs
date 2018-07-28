@@ -22,12 +22,12 @@ public class ShrinkGrow : MonoBehaviour
     public SizeProperties mediumProperties;
     public SizeProperties largeProperties;
 
-    protected PlatformerCharacter2D character;
+    protected Character character;
     protected Rigidbody2D rb2d;
 
     void Start()
     {
-        character = GetComponent<PlatformerCharacter2D>();
+        character = GetComponent<Character>();
         rb2d = GetComponent<Rigidbody2D>();
 
         SetSizeProperties(smallProperties);
