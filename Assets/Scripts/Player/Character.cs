@@ -106,4 +106,23 @@ public class Character : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
+    public void Enter()
+    {
+        BoxCollider2D playerBox = GetComponentInChildren<BoxCollider2D>();
+
+        Vector2 center = (Vector2)transform.position;
+        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, playerBox.size, 0);
+
+        for (int i = 0; i < hitColliders.Length; ++i)
+        {
+            if (hitColliders[i].CompareTag("Portal"))
+            {
+                Portal portalCollision = hitColliders[i].GetComponent<Portal>();
+                transform.position = portalCollision.destinationObject.transform.position + portalCollision.destinationOffset;
+                Move(0, false, false);
+            }
+        }
+
+    }
 }
