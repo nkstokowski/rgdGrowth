@@ -9,6 +9,8 @@ public class ShrinkGrow : MonoBehaviour
     public enum SizeState { SMALL, MEDIUM, LARGE }
     public SizeState sizeState;
 
+    public LayerMask sizeChangeStopingLayers;
+
     [Serializable]
     public class SizeProperties
     {
@@ -59,7 +61,7 @@ public class ShrinkGrow : MonoBehaviour
 
         Vector2 center = (Vector2)transform.position + new Vector2(0, halfHeight);
         Vector2 size = new Vector2(width - 0.2f, height - 0.2f);
-        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, size, 0);
+        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, size, 0, sizeChangeStopingLayers);
 
         #region Debug
         const int Duration = 5;
@@ -78,7 +80,7 @@ public class ShrinkGrow : MonoBehaviour
 
         for (int i = 0; i < hitColliders.Length; ++i)
         {
-            if (!hitColliders[i].CompareTag("Player"))
+            if (!hitColliders[i].CompareTag("Player") && !hitColliders[i].CompareTag("PlayerHead"))
                 return false;
         }
         return true;
