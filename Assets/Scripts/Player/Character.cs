@@ -10,10 +10,8 @@ public class Character : MonoBehaviour
     [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
-    public Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     [SerializeField] private bool isGrounded;            // Whether or not the player is grounded.
-    public Transform m_CeilingCheck;   // A position marking where to check for ceilings
     const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
