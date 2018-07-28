@@ -33,5 +33,10 @@ public class PlayerControls : MonoBehaviour
         // Pass all parameters to the character control script.
         m_Character.Move(h, crouch, m_Jump);
         m_Jump = false;
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            m_Character.Enter();
+        }
     }
 }
