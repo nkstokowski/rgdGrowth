@@ -38,9 +38,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4676710399658876}
+  - component: {fileID: 58706056389162612}
   m_Layer: 0
-  m_Name: CeilingCheck
-  m_TagString: Player
+  m_Name: Player Head Collider
+  m_TagString: PlayerHead
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,21 +63,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1735740181867252
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4556665097555446}
-  m_Layer: 0
-  m_Name: GroundCheck
-  m_TagString: Player
-  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4076109422110966
 Transform:
   m_ObjectHideFlags: 1
@@ -88,20 +74,7 @@ Transform:
   m_LocalScale: {x: 1.584128, y: 1.584128, z: 1.584128}
   m_Children: []
   m_Father: {fileID: 4645742770873042}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4556665097555446
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1735740181867252}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.001, z: 0}
-  m_LocalScale: {x: 0.5080346, y: 0.5080353, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4645742770873042}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4645742770873042
 Transform:
@@ -110,12 +83,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1064660622782774}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: 8, z: 0}
+  m_LocalPosition: {x: 4.57, y: 6.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4076109422110966}
   - {fileID: 4676710399658876}
-  - {fileID: 4556665097555446}
+  - {fileID: 4076109422110966}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -126,11 +98,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1125534335282082}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8909998, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
+  m_LocalPosition: {x: 0.066, y: 0.774, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4645742770873042}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50213289560144316
 Rigidbody2D:
@@ -152,6 +124,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &58706056389162612
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1125534335282082}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.08
 --- !u!61 &61032125462510840
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -199,16 +186,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e87bfa6ff61da884ca4e72320821252f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
-  jumpSpeed: 400
-  m_CrouchSpeed: 0.36
-  m_AirControl: 1
+  state: 0
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_GroundCheck: {fileID: 4556665097555446}
-  m_Grounded: 0
-  m_CeilingCheck: {fileID: 4676710399658876}
+  maxSpeed: 10
+  jumpSpeed: 400
+  maxHoverTime: 1
+  hasHoveredSinceGrounded: 0
+  hoverLeft: 0
 --- !u!114 &114968069306055710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,6 +207,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sizeState: 0
+  sizeChangeStopingLayers:
+    serializedVersion: 2
+    m_Bits: 0
   smallProperties:
     mass: 0.05
     maxSpeed: 2
