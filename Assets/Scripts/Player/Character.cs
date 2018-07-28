@@ -90,7 +90,7 @@ public class Character : MonoBehaviour
 
         // Multiply the player's x local scale by -1.
         Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
+        theScale.x = m_FacingRight ? 1 : -1;
         transform.localScale = theScale;
     }
 
@@ -98,7 +98,7 @@ public class Character : MonoBehaviour
     {
         BoxCollider2D playerBox = GetComponentInChildren<BoxCollider2D>();
 
-        Vector2 center = (Vector2)transform.position;
+        Vector2 center = transform.position;
         Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, playerBox.size, 0);
 
         for (int i = 0; i < hitColliders.Length; ++i)
