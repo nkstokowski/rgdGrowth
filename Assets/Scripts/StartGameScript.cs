@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StartGameScript : MonoBehaviour
 {
-    public string SceneName = "Level1Test";
+    public string SceneName = "level1Test";
 
     public void StartGame()
     {
