@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Spider : MonoBehaviour, IFlammable
+public class Spider : Animal, IFlammable
 {
     public float maxDistance = 20;
     public float speed = 1;
@@ -11,7 +11,7 @@ public class Spider : MonoBehaviour, IFlammable
     private LineRenderer lineRenderer;
     private Vector2 startPosition;
 
-    private void Awake()
+    private void Start()
     {
         startPosition = transform.position;
 
@@ -58,14 +58,6 @@ public class Spider : MonoBehaviour, IFlammable
         else
         {
             return startPosition + Vector2.down * maxDistance;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(SceneManager.GetSceneAt(0).name);
         }
     }
 
