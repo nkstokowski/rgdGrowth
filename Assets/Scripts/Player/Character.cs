@@ -175,8 +175,8 @@ public class Character : MonoBehaviour, IFlammable
     public void LaunchFireBall()
     {
         GameManager.Instance.LaunchFireBall(
-            (Vector3)rb2d.position + fireBallLaunchPosition.localPosition, 
-            Mathf.Sign(transform.localScale.x) == 1.0f ? Vector2.right : Vector2.left, 
+            fireBallLaunchPosition.position,
+            isFacingRight ? Vector2.right : Vector2.left, 
             fireBallSpeed, 
             FireBall.Team.DAMAGES_ANIMAL);
     }
