@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Snake : MonoBehaviour, IFlammable
+public class Snake : Animal, IFlammable
 {
     public Transform firePosition;
     public bool fireRight;
@@ -25,17 +25,6 @@ public class Snake : MonoBehaviour, IFlammable
         {
             GameManager.Instance.LaunchFireBall(firePosition.position, fireRight ? Vector2.right : Vector2.left, fireBallSpeed, FireBall.Team.DAMAGES_PLAYER);
             timeLastFired = Time.time;
-        }
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            if (collision.GetComponentInParent<ShrinkGrow>().sizeState == ShrinkGrow.SizeState.LARGE)
-            {
-                Destroy(gameObject);
-            }
         }
     }
 }

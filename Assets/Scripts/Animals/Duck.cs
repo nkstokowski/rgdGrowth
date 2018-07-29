@@ -2,17 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Duck : MonoBehaviour, IFlammable
+public class Duck : Animal, IFlammable
 {
     public float upwardForceInWater = 10;
-    protected Rigidbody2D rb2d;
 
-    private void Awake()
+    public AudioClip[] audioClips;
+    public float soundInterval;
+    public float timeOfPreviousQuack;
+    private AudioSource audioSource;
+
+    protected override void Awake()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        base.Awake();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void Update()
+    {
+        if (Time.time - timeOfPreviousQuack > soundInterval)
+        {
+            timeOfPreviousQuack = Time.time;
+
+            if (audioClips.Length != 0)
+            {
+                audioSource.clip = audioClips[Random.Range(0, audioClips.Length)];
+                audioSource.Play();
+            }
+        }
+    }
+
+    protected void OnTriggerStay2D(Collider2D collision)
     {
         WaterZone waterZone = collision.GetComponentInParent<WaterZone>();
 

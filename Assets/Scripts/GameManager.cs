@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     private const int DEFAULT_FIRE_EFFECT_DURATION = 2;
     public FireBall fireBall;
     public SpriteRenderer fireEffect;
+    public SpriteRenderer wateringEffect;
 
     public void Awake()
     {
@@ -32,5 +33,15 @@ public class GameManager : MonoBehaviour
         newFireEffect.transform.localScale = scale;
 
         Destroy(newFireEffect.gameObject, duration);
+    }
+
+    public void SpawnWaterEffect(Vector2 position, Vector2 scale, float duration = DEFAULT_FIRE_EFFECT_DURATION)
+    {
+        SpriteRenderer newWateringEffect = Instantiate(wateringEffect);
+
+        newWateringEffect.transform.position = position;
+        newWateringEffect.transform.localScale = scale;
+
+        Destroy(newWateringEffect.gameObject, duration);
     }
 }

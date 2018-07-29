@@ -113,6 +113,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &482257309
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4073093243114160, guid: cccad5b087e6f744593139585b5d97c0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073093243114160, guid: cccad5b087e6f744593139585b5d97c0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073093243114160, guid: cccad5b087e6f744593139585b5d97c0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073093243114160, guid: cccad5b087e6f744593139585b5d97c0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073093243114160, guid: cccad5b087e6f744593139585b5d97c0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073093243114160, guid: cccad5b087e6f744593139585b5d97c0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073093243114160, guid: cccad5b087e6f744593139585b5d97c0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073093243114160, guid: cccad5b087e6f744593139585b5d97c0, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cccad5b087e6f744593139585b5d97c0, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &719925596
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,10 +426,10 @@ RectTransform:
   m_Father: {fileID: 2033775256}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -26.51001}
-  m_SizeDelta: {x: 528, y: 57.57}
+  m_AnchorMin: {x: 0, y: 0.64575505}
+  m_AnchorMax: {x: 1, y: 0.8343113}
+  m_AnchoredPosition: {x: 0.5, y: 0}
+  m_SizeDelta: {x: -9, y: 0.5699997}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1521536799
 MonoBehaviour:

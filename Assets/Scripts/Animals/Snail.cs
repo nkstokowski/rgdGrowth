@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Snail : MonoBehaviour, IFlammable
+public class Snail : Animal, IFlammable
 {
     public bool isFacingRight = true;
     public float leftX, rightX;
