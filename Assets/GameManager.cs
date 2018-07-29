@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(this);
     }
 
     public void LaunchFireBall(Vector2 position, Vector2 direction, float speed, FireBall.Team team)
