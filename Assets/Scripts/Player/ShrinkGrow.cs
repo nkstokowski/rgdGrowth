@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets._2D;
+using DG.Tweening;
 
 public class ShrinkGrow : MonoBehaviour
 {
@@ -118,8 +119,10 @@ public class ShrinkGrow : MonoBehaviour
     {
         rb2d.mass = sizeProperties.mass;
         character.maxSpeed = sizeProperties.maxSpeed;
-        transform.localScale = new Vector2(sizeProperties.height, sizeProperties.height);
+        //transform.localScale = new Vector2(sizeProperties.height, sizeProperties.height);
+        transform.DOScale(new Vector2(sizeProperties.height, sizeProperties.height),.3f);
         character.jumpSpeed = Mathf.Sqrt(sizeProperties.jumpHeight * 2 * Physics2D.gravity.magnitude);
-        Camera.main.orthographicSize = sizeProperties.cameraHalfHeight;
+        //Camera.main.orthographicSize = sizeProperties.cameraHalfHeight;
+        Camera.main.DOOrthoSize(sizeProperties.cameraHalfHeight, 0.3f);
     }
 }
