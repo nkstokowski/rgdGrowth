@@ -20,6 +20,10 @@ public class Character : MonoBehaviour, IFlammable
     public bool hasHoveredSinceGrounded = false;
     public float hoverLeft = 0;
 
+    [Header("Fire")]
+    public Transform fireBallLaunchPosition;
+    public float fireBallSpeed = 2.0f;
+
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -128,7 +132,7 @@ public class Character : MonoBehaviour, IFlammable
         currentVelocity.y = 0;
         rb2d.velocity = currentVelocity;
 
-        
+
         rb2d.gravityScale = 0;
     }
 
@@ -157,7 +161,15 @@ public class Character : MonoBehaviour, IFlammable
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
+    }
 
+    public void LaunchFireBall()
+    {
+        GameManager.Instance.LaunchFireBall(
+            (Vector3)rb2d.position + fireBallLaunchPosition.localPosition, 
+            Mathf.Sign(transform.localScale.x) == 1.0f ? Vector2.right : Vector2.left, 
+            fireBallSpeed, 
+            FireBall.Team.DAMAGES_ENEMY);
     }
 
     void IFlammable.HandleFire()
