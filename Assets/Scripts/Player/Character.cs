@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IFlammable
 {
     public enum PlayerState { ON_GROUND, IN_AIR, IN_AIR_AND_HOVERING }
     public PlayerState state = PlayerState.ON_GROUND;
@@ -19,6 +19,10 @@ public class Character : MonoBehaviour
     public float maxHoverTime = 1.0f;
     public bool hasHoveredSinceGrounded = false;
     public float hoverLeft = 0;
+
+    [Header("Fire")]
+    public Transform fireBallLaunchPosition;
+    public float fireBallSpeed = 2.0f;
 
     private void Awake()
     {
@@ -128,7 +132,7 @@ public class Character : MonoBehaviour
         currentVelocity.y = 0;
         rb2d.velocity = currentVelocity;
 
-        
+
         rb2d.gravityScale = 0;
     }
 
@@ -152,7 +156,24 @@ public class Character : MonoBehaviour
                 transform.position = portalCollision.destinationObject.transform.position + portalCollision.destinationOffset;
                 Move(0, false);
             }
+            else if (hitColliders[i].CompareTag("Exit"))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
         }
+    }
 
+    public void LaunchFireBall()
+    {
+        GameManager.Instance.LaunchFireBall(
+            (Vector3)rb2d.position + fireBallLaunchPosition.localPosition, 
+            Mathf.Sign(transform.localScale.x) == 1.0f ? Vector2.right : Vector2.left, 
+            fireBallSpeed, 
+            FireBall.Team.DAMAGES_ENEMY);
+    }
+
+    void IFlammable.HandleFire()
+    {
+        SceneManager.LoadScene(SceneManager.GetSceneAt(0).name);
     }
 }

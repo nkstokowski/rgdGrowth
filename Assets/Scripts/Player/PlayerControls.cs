@@ -36,5 +36,10 @@ public class PlayerControls : MonoBehaviour
         {
             m_Character.Enter();
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            m_Character.LaunchFireBall();
+        }
     }
 }
