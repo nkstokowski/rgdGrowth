@@ -27,6 +27,9 @@ public class Character : MonoBehaviour, IFlammable
     public Transform fireBallLaunchPosition;
     public float fireBallSpeed = 2.0f;
 
+    [Header("Water Splash")]
+    public float wateringRadius = 2.0f;
+
     private void Awake()
     {
         Player = this;
@@ -179,6 +182,25 @@ public class Character : MonoBehaviour, IFlammable
             isFacingRight ? Vector2.right : Vector2.left, 
             fireBallSpeed, 
             FireBall.Team.DAMAGES_ANIMAL);
+    }
+
+    public void WaterPlants()
+    {
+        Collider2D[] nearbyColliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(wateringRadius, 0.5f), 0);
+        for (int i = 0; i < nearbyColliders.Length; ++i)
+        {
+            IWaterable waterable =
+                nearbyColliders[i].GetComponentInParent<IWaterable>() ?? nearbyColliders[i].GetComponentInChildren<IWaterable>();
+            if (waterable != null)
+            {
+                waterable.HandleWatering();
+            }
+        }
+
+        for (float f = -wateringRadius; f <= wateringRadius; f += 0.2f)
+        {
+            GameManager.Instance.SpawnWaterEffect(transform.position + Vector3.right * f, Vector2.one);
+        }
     }
 
     public void DamagePlayer()
