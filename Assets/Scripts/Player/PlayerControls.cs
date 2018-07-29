@@ -41,5 +41,10 @@ public class PlayerControls : MonoBehaviour
         {
             m_Character.LaunchFireBall();
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            m_Character.WaterPlants();
+        }
     }
 }
