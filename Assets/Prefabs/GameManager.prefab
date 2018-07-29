@@ -54,5 +54,5 @@ MonoBehaviour:
   fireBall: {fileID: 114469201668194728, guid: f76bf7e98fa62c54e9543f0b86fb6488, type: 2}
   fireEffect: {fileID: 212356942052271024, guid: 59f572fe7ade6594ebc131453f03ced9,
     type: 2}
-  wateringEffect: {fileID: 212894604867662768, guid: a462eb7cf933d614b8b16ad5ffd03407,
+  wateringEffect: {fileID: 212810393049349234, guid: a462eb7cf933d614b8b16ad5ffd03407,
     type: 2}
