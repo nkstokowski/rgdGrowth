@@ -36,8 +36,7 @@ public class Snail : Animal, IFlammable
 
     public void HandleFire()
     {
-        Destroy(gameObject, 2);
-        this.enabled = false;
+        Kill();
 
         GameManager.Instance.SpawnFireEffect(transform.position, transform.localScale);
     }

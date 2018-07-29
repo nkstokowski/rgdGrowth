@@ -18,11 +18,11 @@ public class GameManager : MonoBehaviour
     {
         FireBall newFireBall = Instantiate(fireBall);
 
-        fireBall.team = team;
-        fireBall.direction = direction.normalized;
-        fireBall.speed = speed;
-        fireBall.transform.position = position;
-        fireBall.transform.right = direction;
+        newFireBall.team = team;
+        newFireBall.direction = direction.normalized;
+        newFireBall.speed = speed;
+        newFireBall.transform.position = position;
+        newFireBall.transform.right = direction;
     }
 
     public void SpawnFireEffect(Vector2 position, Vector2 scale, float duration = DEFAULT_FIRE_EFFECT_DURATION)

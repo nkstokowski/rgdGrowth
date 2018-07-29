@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 1
-  direction: {x: 1, y: 0}
+  direction: {x: -1, y: 0}
   speed: 2
 --- !u!212 &212020540621075978
 SpriteRenderer:
