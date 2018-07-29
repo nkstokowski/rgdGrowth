@@ -16,6 +16,7 @@ public class Character : MonoBehaviour, IFlammable
 
     private Rigidbody2D rb2d;
     private bool isFacingRight = true;  // For determining which way the player is currently facing.
+    private SpriteRenderer sr;
 
     [Header("Hovering")]
     public float maxHoverTime = 1.0f;
@@ -31,6 +32,7 @@ public class Character : MonoBehaviour, IFlammable
         Player = this;
 
         rb2d = GetComponent<Rigidbody2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -120,10 +122,13 @@ public class Character : MonoBehaviour, IFlammable
         // Switch the way the player is labelled as facing.
         isFacingRight = !isFacingRight;
 
+        // Fixes paper mario turn 
+        sr.flipX = !isFacingRight;
+
         // Multiply the player's x local scale by -1.
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+        //Vector3 theScale = transform.localScale;
+        //theScale.x *= -1;
+        //transform.localScale = theScale;
     }
 
     private void StartHovering()
