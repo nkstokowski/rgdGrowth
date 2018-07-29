@@ -19,10 +19,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4027100702343628}
+  - component: {fileID: 114372190929480936}
   - component: {fileID: 212363383890334732}
   - component: {fileID: 50712750548622480}
   - component: {fileID: 58276855227996944}
-  - component: {fileID: 114372190929480936}
   m_Layer: 0
   m_Name: bee
   m_TagString: Untagged
@@ -89,6 +89,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8924ccf82f15a4db5c310e37f4f674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animalParameters:
+    canBeCrushedByPlayer: 1
+    minimumSizeToCrush: 2
+    damagesPlayer: 1
+    minimumSizeToDamagePlayer: 0
+    maximumSizeToDamagePlayer: 0
   radius: 20
   speed: 0.2
   maxSizeState: 0

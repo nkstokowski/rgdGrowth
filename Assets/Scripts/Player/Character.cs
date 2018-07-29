@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour, IFlammable
 {
+    public static Character Player { get; private set; }
+
     public enum PlayerState { ON_GROUND, IN_AIR, IN_AIR_AND_HOVERING }
     public PlayerState state = PlayerState.ON_GROUND;
 
@@ -27,6 +29,8 @@ public class Character : MonoBehaviour, IFlammable
 
     private void Awake()
     {
+        Player = this;
+
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
     }
@@ -171,10 +175,15 @@ public class Character : MonoBehaviour, IFlammable
     public void LaunchFireBall()
     {
         GameManager.Instance.LaunchFireBall(
-            (Vector3)rb2d.position + fireBallLaunchPosition.localPosition, 
-            Mathf.Sign(transform.localScale.x) == 1.0f ? Vector2.right : Vector2.left, 
+            fireBallLaunchPosition.position,
+            isFacingRight ? Vector2.right : Vector2.left, 
             fireBallSpeed, 
-            FireBall.Team.DAMAGES_ENEMY);
+            FireBall.Team.DAMAGES_ANIMAL);
+    }
+
+    public void DamagePlayer()
+    {
+        SceneManager.LoadScene(SceneManager.GetSceneAt(0).name);
     }
 
     void IFlammable.HandleFire()

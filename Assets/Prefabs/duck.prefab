@@ -19,10 +19,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4504812942936600}
+  - component: {fileID: 114944285271823984}
   - component: {fileID: 212231847702457812}
   - component: {fileID: 58709230949238128}
   - component: {fileID: 50799417579010014}
-  - component: {fileID: 114944285271823984}
   m_Layer: 0
   m_Name: duck
   m_TagString: Untagged
@@ -89,6 +89,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28464bda40c9f3a4a9bad2a4c0d41cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animalParameters:
+    canBeCrushedByPlayer: 0
+    minimumSizeToCrush: 0
+    damagesPlayer: 0
+    minimumSizeToDamagePlayer: 0
+    maximumSizeToDamagePlayer: 0
   upwardForceInWater: 1
 --- !u!212 &212231847702457812
 SpriteRenderer:
