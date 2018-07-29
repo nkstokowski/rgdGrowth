@@ -16,7 +16,7 @@ public class Duck : Animal, IFlammable
         {
             timeOfPreviousQuack = Time.time;
 
-            if (audioClips.Length != 0)
+            if (audioSource != null && audioClips.Length != 0)
             {
                 audioSource.clip = audioClips[Random.Range(0, audioClips.Length)];
                 audioSource.Play();
