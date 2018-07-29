@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -43,5 +43,24 @@ public class GameManager : MonoBehaviour
         newWateringEffect.transform.localScale = scale;
 
         Destroy(newWateringEffect.gameObject, duration);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.O))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        }
     }
 }

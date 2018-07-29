@@ -17,6 +17,7 @@ public class Character : MonoBehaviour, IFlammable
     private Rigidbody2D rb2d;
     private bool isFacingRight = true;  // For determining which way the player is currently facing.
     private SpriteRenderer sr;
+    private Animator anim; 
 
     [Header("Hovering")]
     public float maxHoverTime = 1.0f;
@@ -36,6 +37,7 @@ public class Character : MonoBehaviour, IFlammable
 
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
