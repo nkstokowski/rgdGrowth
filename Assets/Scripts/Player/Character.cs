@@ -4,79 +4,137 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    public enum PlayerState { ON_GROUND, IN_AIR, IN_AIR_AND_HOVERING }
+    public PlayerState state = PlayerState.ON_GROUND;
+
+    [SerializeField] public LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+
     [SerializeField] public float maxSpeed = 10f;                    // The fastest the player can travel in the x axis.
     [SerializeField] public float jumpSpeed = 400f;                  // Amount of force added when the player jumps.
-    [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
-    [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
-    [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
-    const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-    [SerializeField] private bool isGrounded;            // Whether or not the player is grounded.
-    const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
-    private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+    private Rigidbody2D rb2d;
+    private bool isFacingRight = true;  // For determining which way the player is currently facing.
+
+    [Header("Hovering")]
+    public float maxHoverTime = 1.0f;
+    public bool hasHoveredSinceGrounded = false;
+    public float hoverLeft = 0;
 
     private void Awake()
     {
-        m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
     }
-
 
     private void FixedUpdate()
     {
-        isGrounded = false;
+        // Check if is on ground.
+        bool isOnGround = CheckIfOnGround();
 
-        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+        switch (state)
+        {
+            case PlayerState.ON_GROUND:
+                if (!isOnGround)
+                {
+                    state = PlayerState.IN_AIR;
+                }
+                break;
+            case PlayerState.IN_AIR:
+                if (isOnGround)
+                {
+                    state = PlayerState.ON_GROUND;
+                    hasHoveredSinceGrounded = false;
+                }
+                break;
+            case PlayerState.IN_AIR_AND_HOVERING:
+                if (isOnGround)
+                {
+                    StopHovering();
+                    state = PlayerState.ON_GROUND;
+                    hasHoveredSinceGrounded = false;
+                }
+                else
+                {
+                    hoverLeft -= Time.fixedDeltaTime;
+                    if (hoverLeft <= 0)
+                    {
+                        StopHovering();
+                    }
+                }
+                break;
+        }
+    }
+
+    private bool CheckIfOnGround()
+    {
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.down, 0.05f, m_WhatIsGround);
         for (int i = 0; i < hits.Length; i++)
         {
             if (!hits[i].collider.CompareTag("Player"))
-                isGrounded = true;
+                return true;
         }
+        return false;
     }
 
-
-    public void Move(float move, bool jump)
+    public void Move(float move, bool doJump)
     {
-        //only control the player if grounded or airControl is turned on
-        if (isGrounded || m_AirControl)
-        {
-            // Move the character
-            m_Rigidbody2D.velocity = new Vector2(move * maxSpeed, m_Rigidbody2D.velocity.y);
+        // Move the character
+        rb2d.velocity = new Vector2(move * maxSpeed, rb2d.velocity.y);
 
-            // If the input is moving the player right and the player is facing left...
-            if (move > 0 && !m_FacingRight)
-            {
-                // ... flip the player.
-                Flip();
-            }
-            // Otherwise if the input is moving the player left and the player is facing right...
-            else if (move < 0 && m_FacingRight)
-            {
-                // ... flip the player.
-                Flip();
-            }
-        }
-        // If the player should jump...
-        if (isGrounded && jump)
+        // If the input is moving the player right and the player is facing left...
+        if (move > 0 && !isFacingRight)
         {
-            // Add a vertical force to the player.
-            isGrounded = false;
-            m_Rigidbody2D.velocity += new Vector2(0f, jumpSpeed);
+            Flip();
+        }
+        else if (move < 0 && isFacingRight)
+        {
+            Flip();
+        }
+
+        // If the player should jump...
+        if (state == PlayerState.ON_GROUND && doJump)
+        {
+            rb2d.velocity += new Vector2(0f, jumpSpeed);
+            state = PlayerState.IN_AIR;
+        }
+        else if (state == PlayerState.IN_AIR && doJump && !hasHoveredSinceGrounded)
+        {
+            StartHovering();
+        }
+        else if (state == PlayerState.IN_AIR_AND_HOVERING && doJump)
+        {
+            StopHovering();
+            state = PlayerState.IN_AIR;
         }
     }
-
 
     private void Flip()
     {
         // Switch the way the player is labelled as facing.
-        m_FacingRight = !m_FacingRight;
+        isFacingRight = !isFacingRight;
 
         // Multiply the player's x local scale by -1.
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    private void StartHovering()
+    {
+        state = PlayerState.IN_AIR_AND_HOVERING;
+        hasHoveredSinceGrounded = true;
+        hoverLeft = maxHoverTime;
+
+        Vector2 currentVelocity = rb2d.velocity;
+        currentVelocity.y = 0;
+        rb2d.velocity = currentVelocity;
+
+        
+        rb2d.gravityScale = 0;
+    }
+
+    private void StopHovering()
+    {
+        rb2d.gravityScale = 1;
     }
 
     public void Enter()
