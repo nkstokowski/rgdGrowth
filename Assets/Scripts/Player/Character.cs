@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
@@ -93,6 +93,10 @@ public class Character : MonoBehaviour
                 Portal portalCollision = hitColliders[i].GetComponent<Portal>();
                 transform.position = portalCollision.destinationObject.transform.position + portalCollision.destinationOffset;
                 Move(0, false);
+            }
+            else if (hitColliders[i].CompareTag("Exit"))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
 
