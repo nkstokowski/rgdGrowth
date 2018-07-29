@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -94,6 +95,7 @@ public class Character : MonoBehaviour, IFlammable
     {
         // Move the character
         rb2d.velocity = new Vector2(move * maxSpeed, rb2d.velocity.y);
+        anim.SetFloat("speed", Mathf.Abs(rb2d.velocity.x));
 
         // If the input is moving the player right and the player is facing left...
         if (move > 0 && !isFacingRight)
@@ -146,12 +148,14 @@ public class Character : MonoBehaviour, IFlammable
         currentVelocity.y = 0;
         rb2d.velocity = currentVelocity;
 
-
+        anim.SetBool("hovering", true);
         rb2d.gravityScale = 0;
     }
 
     private void StopHovering()
     {
+        anim.SetBool("hovering", false);
+
         rb2d.gravityScale = 1;
     }
 
@@ -179,11 +183,23 @@ public class Character : MonoBehaviour, IFlammable
 
     public void LaunchFireBall()
     {
+        StartCoroutine("AnimShoot");
+
         GameManager.Instance.LaunchFireBall(
             fireBallLaunchPosition.position,
             isFacingRight ? Vector2.right : Vector2.left, 
             fireBallSpeed, 
             FireBall.Team.DAMAGES_ANIMAL);
+
+    }
+
+    private IEnumerator AnimShoot()
+    {
+        anim.SetBool("shooting", true);
+        yield return new WaitForSeconds(2);
+        anim.SetBool("shooting", false);
+
+
     }
 
     public void WaterPlants()
