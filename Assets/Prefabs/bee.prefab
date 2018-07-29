@@ -191,6 +191,7 @@ MonoBehaviour:
     damagesPlayer: 1
     minimumSizeToDamagePlayer: 0
     maximumSizeToDamagePlayer: 0
+    deathSound: {fileID: 8300000, guid: 91deff9267d949d40b00e9e3ae4e80d2, type: 3}
   radius: 20
   speed: 0.2
   maxSizeState: 0

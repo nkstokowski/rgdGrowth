@@ -22,13 +22,19 @@ public class Character : MonoBehaviour, IFlammable
     public float maxHoverTime = 1.0f;
     public bool hasHoveredSinceGrounded = false;
     public float hoverLeft = 0;
+    public AudioClip hoverSound;
 
     [Header("Fire")]
     public Transform fireBallLaunchPosition;
     public float fireBallSpeed = 2.0f;
+    public AudioClip fireBallSound;
 
     [Header("Water Splash")]
     public float wateringRadius = 2.0f;
+    public AudioClip waterSplashSound;
+
+    [Header("Audio Sources")]
+    public AudioSource abilitySoundSource;
 
     private void Awake()
     {
@@ -146,6 +152,9 @@ public class Character : MonoBehaviour, IFlammable
 
 
         rb2d.gravityScale = 0;
+
+        abilitySoundSource.clip = hoverSound;
+        abilitySoundSource.Play();
     }
 
     private void StopHovering()
@@ -182,6 +191,9 @@ public class Character : MonoBehaviour, IFlammable
             isFacingRight ? Vector2.right : Vector2.left, 
             fireBallSpeed, 
             FireBall.Team.DAMAGES_ANIMAL);
+
+        abilitySoundSource.clip = fireBallSound;
+        abilitySoundSource.Play();
     }
 
     public void WaterPlants()
@@ -201,6 +213,9 @@ public class Character : MonoBehaviour, IFlammable
         {
             GameManager.Instance.SpawnWaterEffect(transform.position + Vector3.right * f, Vector2.one);
         }
+
+        abilitySoundSource.clip = waterSplashSound;
+        abilitySoundSource.Play();
     }
 
     public void DamagePlayer()

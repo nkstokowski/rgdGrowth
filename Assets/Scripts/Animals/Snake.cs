@@ -9,6 +9,7 @@ public class Snake : Animal, IFlammable
     public float fireInterval;
     public float timeLastFired = 0;
     public float fireBallSpeed = 1.75f;
+    public AudioClip onFireSound;
 
     public void HandleFire()
     {
@@ -24,6 +25,12 @@ public class Snake : Animal, IFlammable
         if (Time.time - timeLastFired > fireInterval)
         {
             GameManager.Instance.LaunchFireBall(firePosition.position, fireRight ? Vector2.right : Vector2.left, fireBallSpeed, FireBall.Team.DAMAGES_PLAYER);
+            if (onFireSound != null)
+            {
+                audioSource.clip = onFireSound;
+                audioSource.Play();
+            }
+
             timeLastFired = Time.time;
         }
     }

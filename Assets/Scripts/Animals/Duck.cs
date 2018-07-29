@@ -9,14 +9,6 @@ public class Duck : Animal, IFlammable
     public AudioClip[] audioClips;
     public float soundInterval;
     public float timeOfPreviousQuack;
-    private AudioSource audioSource;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        audioSource = GetComponent<AudioSource>();
-    }
 
     private void Update()
     {
@@ -55,8 +47,7 @@ public class Duck : Animal, IFlammable
 
     public void HandleFire()
     {
-        Destroy(gameObject, 2);
-        this.enabled = false;
+        Kill();
 
         GameManager.Instance.SpawnFireEffect(transform.position, transform.localScale);
     }

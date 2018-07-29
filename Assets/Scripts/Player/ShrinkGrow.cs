@@ -28,6 +28,10 @@ public class ShrinkGrow : MonoBehaviour
     protected Character character;
     protected Rigidbody2D rb2d;
 
+    public AudioSource soundSource;
+    public AudioClip growSound;
+    public AudioClip shrinkSound;
+
     void Start()
     {
         character = GetComponent<Character>();
@@ -90,12 +94,24 @@ public class ShrinkGrow : MonoBehaviour
 
     private void SetSizeState( SizeState sizeState)
     {
+        if (this.sizeState < sizeState)
+        {
+            soundSource.clip = growSound;
+            soundSource.Play();
+        }
+        else if (sizeState < this.sizeState)
+        {
+            soundSource.clip = shrinkSound;
+            soundSource.Play();
+        }
+
         switch (sizeState)
         {
             case SizeState.SMALL:
                 if (CanPlayerGrowToThisSize(smallProperties))
                 {
                     SetSizeProperties(smallProperties);
+
                     this.sizeState = SizeState.SMALL;
                 }
                 break;

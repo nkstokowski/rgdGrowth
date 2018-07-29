@@ -12,18 +12,22 @@ public class Animal : MonoBehaviour
         public bool damagesPlayer;
         public ShrinkGrow.SizeState minimumSizeToDamagePlayer;
         public ShrinkGrow.SizeState maximumSizeToDamagePlayer;
+
+        public AudioClip deathSound;
     }
     public AnimalParameters animalParameters;
 
     protected Rigidbody2D rb2d;
     protected Collider2D[] colliders;
     protected SpriteRenderer[] spriteRenderers;
+    protected AudioSource audioSource;
 
     protected virtual void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         colliders = GetComponentsInChildren<Collider2D>();
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        audioSource = GetComponentInChildren<AudioSource>();
     }
 
     protected virtual void Kill()
@@ -50,6 +54,15 @@ public class Animal : MonoBehaviour
             rb2d.isKinematic = false;
 
         transform.position += Vector3.forward * 100;
+
+        if (audioSource != null && animalParameters.deathSound != null)
+        {
+            audioSource.clip = animalParameters.deathSound;
+            audioSource.volume = 0.65f;
+            audioSource.spatialBlend = 0;
+            audioSource.loop = false;
+            audioSource.Play();
+        }
 
         Destroy(gameObject, 2.0f);
     }
