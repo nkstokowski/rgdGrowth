@@ -118,7 +118,9 @@ public class Character : MonoBehaviour, IFlammable
         // Switch the way the player is labelled as facing.
         isFacingRight = !isFacingRight;
 
+        // Fixes paper mario turn 
         sr.flipX = !isFacingRight;
+
         // Multiply the player's x local scale by -1.
         //Vector3 theScale = transform.localScale;
         //theScale.x *= -1;
