@@ -33,7 +33,8 @@ public class ShrinkGrow : MonoBehaviour
         character = GetComponent<Character>();
         rb2d = GetComponent<Rigidbody2D>();
 
-        SetSizeProperties(smallProperties);
+        //SetSizeProperties(smallProperties);
+        SetSizeProperties(mediumProperties);
     }
 
     void Update()
