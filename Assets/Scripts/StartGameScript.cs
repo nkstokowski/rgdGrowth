@@ -11,4 +11,10 @@ public class StartGameScript : MonoBehaviour
     {
         SceneManager.LoadScene(SceneName);
     }
+    public string CreditsName = "Credits";
+
+    public void Credits()
+    {
+        SceneManager.LoadScene(CreditsName);
+    }
 }
