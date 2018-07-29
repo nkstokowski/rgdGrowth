@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Duck : MonoBehaviour
+public class Duck : MonoBehaviour, IFlammable
 {
     public float upwardForceInWater = 10;
     protected Rigidbody2D rb2d;
@@ -31,5 +31,13 @@ public class Duck : MonoBehaviour
         {
             rb2d.gravityScale = 1.0f;
         }
+    }
+
+    public void HandleFire()
+    {
+        Destroy(gameObject, 2);
+        this.enabled = false;
+
+        GameManager.Instance.SpawnFireEffect(transform.position, transform.localScale);
     }
 }

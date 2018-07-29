@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IFlammable
 {
     public enum PlayerState { ON_GROUND, IN_AIR, IN_AIR_AND_HOVERING }
     public PlayerState state = PlayerState.ON_GROUND;
@@ -158,5 +158,10 @@ public class Character : MonoBehaviour
             }
         }
 
+    }
+
+    void IFlammable.HandleFire()
+    {
+        SceneManager.LoadScene(SceneManager.GetSceneAt(0).name);
     }
 }

@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Snail : MonoBehaviour {
+public class Snail : MonoBehaviour, IFlammable
+{
     public bool isFacingRight = true;
     public float leftX, rightX;
     public float speed = 0.2f;
-	
-	void Update () {
-       
 
-
-		if (isFacingRight)
+    void Update()
+    {
+        if (isFacingRight)
         {
-            if (transform.position.x <= rightX )
-            transform.position += Vector3.right * Time.deltaTime * speed;
+            if (transform.position.x <= rightX)
+                transform.position += Vector3.right * Time.deltaTime * speed;
             else
                 Flip();
         }
@@ -25,7 +24,7 @@ public class Snail : MonoBehaviour {
             else
                 Flip();
         }
-	}
+    }
 
     private void Flip()
     {
@@ -33,5 +32,13 @@ public class Snail : MonoBehaviour {
         scale.x *= -1;
         transform.localScale = scale;
         isFacingRight = !isFacingRight;
+    }
+
+    public void HandleFire()
+    {
+        Destroy(gameObject, 2);
+        this.enabled = false;
+
+        GameManager.Instance.SpawnFireEffect(transform.position, transform.localScale);
     }
 }

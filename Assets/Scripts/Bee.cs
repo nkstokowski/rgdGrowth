@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Bee : MonoBehaviour
+public class Bee : MonoBehaviour, IFlammable
 {
     Collider2D playerCollider;
     public float radius = 2;
@@ -40,5 +40,13 @@ public class Bee : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void HandleFire()
+    {
+        Destroy(gameObject, 2);
+        this.enabled = false;
+
+        GameManager.Instance.SpawnFireEffect(transform.position, transform.localScale);
     }
 }

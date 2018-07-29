@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Spider : MonoBehaviour
+public class Spider : MonoBehaviour, IFlammable
 {
     public float maxDistance = 20;
     public float speed = 1;
@@ -67,5 +67,13 @@ public class Spider : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetSceneAt(0).name);
         }
+    }
+
+    public void HandleFire()
+    {
+        Destroy(gameObject, 2);
+        this.enabled = false;
+
+        GameManager.Instance.SpawnFireEffect(transform.position, transform.localScale);
     }
 }
