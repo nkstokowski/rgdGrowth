@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Duck : MonoBehaviour, IFlammable
+public class Duck : Animal, IFlammable
 {
     public float upwardForceInWater = 10;
-    protected Rigidbody2D rb2d;
 
-    private void Awake()
-    {
-        rb2d = GetComponent<Rigidbody2D>();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
+    protected void OnTriggerStay2D(Collider2D collision)
     {
         WaterZone waterZone = collision.GetComponentInParent<WaterZone>();
 

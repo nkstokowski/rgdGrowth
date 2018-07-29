@@ -119,6 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75af00b3c252f0e46980fe781626312a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animalParameters:
+    canBeCrushedByPlayer: 0
+    minimumSizeToCrush: 0
+    damagesPlayer: 1
+    minimumSizeToDamagePlayer: 0
+    maximumSizeToDamagePlayer: 2
   maxDistance: 20
   speed: 1
   waitForPlayer: 1

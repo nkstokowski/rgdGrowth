@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireBall : MonoBehaviour {
-    public enum Team { DAMAGES_PLAYER, DAMAGES_ENEMY}
+    public enum Team { DAMAGES_PLAYER, DAMAGES_ANIMAL}
     public Team team;
 
     public Vector2 direction;
@@ -16,8 +16,12 @@ public class FireBall : MonoBehaviour {
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        IFlammable flammable = collision.GetComponentInParent<IFlammable>() ?? collision.GetComponentInChildren<IFlammable>();
+        // If colliding with a fire source
+        if ((collision.GetComponentInParent<FireBall>() ?? collision.GetComponentInParent<FireBall>()) != null)
+            return;
 
+        // If colliding with something flammable
+        IFlammable flammable = collision.GetComponentInParent<IFlammable>() ?? collision.GetComponentInChildren<IFlammable>();
         if (flammable != null)
         {
             if (team == Team.DAMAGES_PLAYER && flammable is Character)
@@ -25,7 +29,7 @@ public class FireBall : MonoBehaviour {
                 flammable.HandleFire();
                 return;
             }
-            else if (team == Team.DAMAGES_ENEMY && !(flammable is Character))
+            else if (team == Team.DAMAGES_ANIMAL && flammable is Animal)
             {
                 flammable.HandleFire();
                 return;
