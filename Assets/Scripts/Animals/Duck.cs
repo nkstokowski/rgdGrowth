@@ -6,6 +6,32 @@ public class Duck : Animal, IFlammable
 {
     public float upwardForceInWater = 10;
 
+    public AudioClip[] audioClips;
+    public float soundInterval;
+    public float timeOfPreviousQuack;
+    private AudioSource audioSource;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        if (Time.time - timeOfPreviousQuack > soundInterval)
+        {
+            timeOfPreviousQuack = Time.time;
+
+            if (audioClips.Length != 0)
+            {
+                audioSource.clip = audioClips[Random.Range(0, audioClips.Length)];
+                audioSource.Play();
+            }
+        }
+    }
+
     protected void OnTriggerStay2D(Collider2D collision)
     {
         WaterZone waterZone = collision.GetComponentInParent<WaterZone>();
