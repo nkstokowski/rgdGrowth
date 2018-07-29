@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4048973572298902}
   - component: {fileID: 114464726206393958}
   - component: {fileID: 212962370277838886}
+  - component: {fileID: 61407335707559498}
   m_Layer: 0
   m_Name: vciouswarsnail
   m_TagString: Untagged
@@ -51,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1343370787463508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2408888, y: 6.1273007, z: 0}
+  m_LocalPosition: {x: 6.1077867, y: 4.9898586, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 0}
   m_Children:
   - {fileID: 4533343958137060}
@@ -71,6 +72,31 @@ Transform:
   m_Father: {fileID: 4048973572298902}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61407335707559498
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1343370787463508}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!96 &96521271379266608
 TrailRenderer:
   serializedVersion: 2
@@ -174,6 +200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3971f6aa2abe9224ba5d7cec71d111ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animalParameters:
+    canBeCrushedByPlayer: 1
+    minimumSizeToCrush: 0
+    damagesPlayer: 0
+    minimumSizeToDamagePlayer: 0
+    maximumSizeToDamagePlayer: 0
   isFacingRight: 0
   leftX: 1
   rightX: 2
