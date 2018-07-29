@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114965729327063278}
   - component: {fileID: 114372766805516530}
   - component: {fileID: 50213289560144316}
+  - component: {fileID: 95578051770275286}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -74,7 +75,7 @@ GameObject:
   m_Layer: 0
   m_Name: Fire Ball Launch Position
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -114,7 +115,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1686747393207214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.257, y: 0.421, z: 0}
+  m_LocalPosition: {x: 0.495, y: 0.563, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4645742770873042}
@@ -193,6 +194,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.19, y: 0.62}
   m_EdgeRadius: 0
+--- !u!95 &95578051770275286
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1064660622782774}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5bd5f354691cd8443a2e0ea99465f22e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114372766805516530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,6 +245,7 @@ MonoBehaviour:
   hoverLeft: 0
   fireBallLaunchPosition: {fileID: 4654167813066386}
   fireBallSpeed: 2
+  wateringRadius: 2
 --- !u!114 &114968069306055710
 MonoBehaviour:
   m_ObjectHideFlags: 1
